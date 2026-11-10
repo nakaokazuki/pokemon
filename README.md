@@ -1,1 +1,5 @@
 # pokemon
+
+pikachu
+rizard
+serena
