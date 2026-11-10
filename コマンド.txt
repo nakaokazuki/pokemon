@@ -1,0 +1,79 @@
+# pokemon：ここからやること（dev → 機能ブランチ → PR）
+
+## すでに完了していること（再実行しない）
+
+- リポジトリ: ~/Desktop/work/pokemon
+- origin: https://github.com/nakaokazuki/pokemon.git
+- main を push 済み
+- dev を作成し push 済み（origin/dev と追跡設定済み）
+- feat-add-pokemon-text を dev から切り、README 更新を commit・push 済み
+- 現在のブランチ: feat-add-pokemon-text（origin と同期済みの想定）
+
+確認:
+
+cd ~/Desktop/work/pokemon
+git branch -vv
+git status
+
+## A. 今のブランチで作業を足してから PR する（いまの続き）
+
+例: index.html や コマンド.txt を同じ PR に含める
+
+# ブランチ確認（* feat-add-pokemon-text であること）
+git status
+
+# 編集後
+git add index.html
+git add コマンド.txt
+# まとめて: git add index.html コマンド.txt
+
+git commit -m "HTMLページとコマンドメモを追加"
+git push
+
+# PR は初回作成（まだ作っていない場合）
+# ブラウザで開く。ベースは dev、比較は feat-add-pokemon-text
+https://github.com/nakaokazuki/pokemon/compare/dev...feat-add-pokemon-text
+
+# gh がある場合
+gh pr create --base dev --head feat-add-pokemon-text \
+  --title "ポケモンテキスト・HTML追加" \
+  --body "README 更新および index.html 追加"
+
+## B. 次の機能から（dev にマージ後の定番手順）
+
+dev を最新にして、そこから新しいブランチを切る。
+
+git checkout dev
+git pull origin dev
+git checkout -b feat-ブランチ名
+
+# 編集 → コミット
+git add 変更したファイル
+git commit -m "メッセージ"
+
+# 新ブランチの初回 push だけ -u
+git push -u origin feat-ブランチ名
+
+# 2回目以降
+git push
+
+# PR（ベースは常に dev）
+https://github.com/nakaokazuki/pokemon/compare/dev...feat-ブランチ名
+
+## よく使う確認
+
+git branch -vv
+git status
+git log --oneline -5
+git remote -v
+
+## つまずきやすいところ
+
+git remote -v          # 正。git remote -config は誤り
+git push -u origin dev # 正。git push -u origin/dev は誤り
+git init は pokemon フォルダ内だけ。Desktop/work で init しない
+
+## 参考：初回セットアップは別メモ
+
+main / dev / 初めての機能ブランチ作成はターミナル履歴どおり完了済み。
+同じ手順が必要なのは「新しい GitHub リポジトリをゼロから作るとき」だけ。
