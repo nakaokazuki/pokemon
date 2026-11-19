@@ -2,4 +2,5 @@
 
 pikachu
 rizard
+lucario
 serena
