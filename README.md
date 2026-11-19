@@ -3,4 +3,5 @@
 pikachu
 rizard
 lucario
+satoshi
 serena
